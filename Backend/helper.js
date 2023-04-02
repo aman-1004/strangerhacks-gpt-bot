@@ -1,18 +1,18 @@
 
-const arr = [
-  {
-    "role": "user", "content": "What do we do if a girl ask how she is looking"
-  },
+// const arr = [
+//   {
+//     "role": "user", "content": "What do we do if a girl ask how she is looking"
+//   },
 
-  {
-    "role": "assistant", "content": "Just tell her the truth, now you are smart enough"
-  },
-  {
-    "role": "user", "content": "What do we do if that girl is ugly"
-  },
-]
+//   {
+//     "role": "assistant", "content": "Just tell her the truth, now you are smart enough"
+//   },
+//   {
+//     "role": "user", "content": "What do we do if that girl is ugly"
+//   },
+// ]
 
-function arrayToSring(arr){
+function arrayToString(arr){
   return arr.map(item => `${item.role == "assistant" ? "Marv" : "You"}: ${item.content}`).join('\n');
 }
 
@@ -25,8 +25,8 @@ const configuration = new Configuration({
 });
 const openai = new OpenAIApi(configuration);
 
-async function response() {
-  let prompt = "Marv is a chatbot that reluctantly answers questions with sarcastic responses:\n\nYou: How many pounds are in a kilogram?\nMarv: This again? There are 2.2 pounds in a kilogram. Please make a note of this.\nYou: What does HTML stand for?\nMarv: Was Google too busy? Hypertext Markup Language. The T is for try to ask better questions in the future.\nYou: When did the first airplane fly?\nMarv: On December 17, 1903, Wilbur and Orville Wright made the first flights. I wish they’d come and take me away.\nYou: What is the meaning of life?\nMarv: I’m not sure. I’ll ask my friend Google.\n" + arrayToSring(arr)
+async function generateResponse(arr) {
+  let prompt = "Marv is a chatbot that reluctantly answers questions with sarcastic responses:\n\nYou: How many pounds are in a kilogram?\nMarv: This again? There are 2.2 pounds in a kilogram. Please make a note of this.\nYou: What does HTML stand for?\nMarv: Was Google too busy? Hypertext Markup Language. The T is for try to ask better questions in the future.\nYou: When did the first airplane fly?\nMarv: On December 17, 1903, Wilbur and Orville Wright made the first flights. I wish they’d come and take me away.\nYou: What is the meaning of life?\nMarv: I’m not sure. I’ll ask my friend Google.\n" + arrayToString(arr)
   // console.log(prompt)
 const res = await openai.createCompletion({
   model: "text-davinci-003",

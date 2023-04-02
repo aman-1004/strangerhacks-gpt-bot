@@ -1,6 +1,8 @@
 const express = require("express");
 const bodyParser= require("body-parser");
 const {isValid} = require('./helper')
+const {arrayToString} = require('./helper')
+const {generateResponse} = require('./helper')
 
 const app= express();
 app.use(bodyParser.json())
@@ -17,7 +19,11 @@ app.post("/validate", async function(req,res){
     res.sendStatus(result? 200: 401)
 });
 
-
+app.post("/", async function(req,res){
+    const obj = req.body.array;
+    arrayToString(obj);
+    res.send(await generateResponse(obj));
+});
 
 
 app.listen(3000, function(err){
