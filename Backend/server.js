@@ -21,8 +21,10 @@ app.post("/validate", async function(req,res){
 
 app.post("/", async function(req,res){
     const obj = req.body.array;
-    arrayToString(obj);
-    res.send(await generateResponse(obj));
+    const key = req.body.key;
+    // arrayToString(obj)
+    const result = await generateResponse(obj, key)
+    res.send(result);
 });
 
 
